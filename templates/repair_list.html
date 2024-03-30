@@ -1,0 +1,57 @@
+{% extends "base.html" %} 
+
+{% block content %}
+<div class="container">
+    <h2>Заявка на ремонт</h2>
+    <a class="btn btn-success" href="{% url 'repairs:create' %}">Створити заявку</a>
+
+
+    <div class="row mt-2">
+        <div class="col-md-12">
+            <table class="table table-success table-striped">
+                <thead>
+                    <tr>
+                        <th>Order number</th>
+                        <th>Locomotive</th>
+                        <th>Repair place</th>
+                        <th>Repair type</th>
+                        <th>Date and time </th>
+                        <th>Status</th>
+                        <th>Open</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for repair in object_list %}
+                    <tr>
+                        <td>{{ repair.id }}</td>
+                        <td>{{ repair.locomotive }}</td>
+                        {% if repair.places_to_work %}
+                            <td>{{ repair.places_to_work }}</td>
+                        {% else %}
+                            <td>Isn't defined</td>
+                        {% endif %}
+                        {% if repair.repair_type %}
+                            <td>{{ repair.repair_type }}</td>
+                        {% else %}
+                            <td>Isn't defined</td>
+                        {% endif %}
+                        {% if repair.time_to_work %}
+                            <td>{{ repair.time_to_work }}</td>
+                        {% else %}
+                            <td>Isn't defined</td>
+                        {% endif %}
+                        <td>{{ repair.get_status_display }}</td>
+                        <td>
+                            <a href="{{ repair.get_absolute_url }}">Open</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            
+            </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

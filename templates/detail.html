@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row mt-2">
+        <div class="col-md-12">
+            <h2>Order Details</h2>
+        </div>
+        <hr>
+        {% include "repair.html" with repair=repair %}
+    </div>
+    <form action="" method="post">
+        {% csrf_token %} 
+        {{ form }}
+        <button class="btn btn-success" type="submit">Update</button>
+    </form>
+</div>
+{% endblock %}

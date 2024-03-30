@@ -1,0 +1,31 @@
+<ul class="list-unstyled">
+    <li><strong>Description: </strong>{{ repair.description }}</li>
+    <li>
+        <strong>Involved: </strong>
+        <ul>
+            {% for user in repair.users.all %}
+            <li><strong>{{ user.get_role_display }}</strong> - {{ user.first_name }} {{ user.last_name }}: {{ user.email }}</li>
+            {% endfor %}
+        </ul>
+    </li>
+    <li><strong>Locomotive: </strong>{{ repair.locomotive }}</li>
+    {% if repair.places_to_work %}
+        <li><strong>Place of repair: </strong>{{ repair.places_to_work }}</li>
+    {% endif %}
+    {% if repair.time_to_work %}
+        <li><strong>Time of repair: </strong>{{ repair.time_to_work }}</li>
+    {% endif %}
+    {% if repair.type_repair %}
+        <li><strong>Type of repair: </strong>{{ repair.type_repair }}</li>
+    {% endif %}
+    {% if repair.parts %}
+        <strong>Spare parts: </strong>
+        <ul>
+            {% for part in repair.parts.all %}
+                <li>{{ part.name }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <li><strong>Status: </strong>{{ repair.get_status_display }}</li>
+    
+</ul>
